@@ -4,8 +4,47 @@
 
 {% block body %}
 
-{{ form_start(form) }}
-   <button type="submit">Submit</button>
-{{ form_end(form) }}
+   <div class="container">
+      <div class="d-flex justify-content-center h-100">
+         <div class="card-signup">
+            <div class="card-header">
+               <h3>Sign Up</h3>
+            </div>
+            <div class="card-body">
+               {{ form_start(form) }}
+                  <form>
+                        <div class="input-group form-group">
+                           <div class="input-group-prepend">
+                              <span class="input-group-text"><i class="fas fa-user"></i></span>
+                           </div>
+                           {{form_widget(form.username, {'attr':{'class':'form-control', 'placeholder':'Username'}})}}
+                        </div>
+                        <div class="input-group form-group">
+                           <div class="input-group-prepend">
+                              <span class="input-group-text"><i class="fas fa-key"></i></span>
+                           </div>
+                              {{form_widget(form.password.first, {'attr':{'class':'form-control', 'placeholder':'Password'}})}}
+                        </div>
+                        <div class="input-group form-group">
+                           <div class="input-group-prepend">
+                              <span class="input-group-text"><i class="fas fa-key"></i></span>
+                           </div>
+                           {{form_widget(form.password.second, {'attr':{'class':'form-control', 'placeholder':'Repeat Password'}})}}
+                        </div>
+                        <div class="input-group form-group">
+                           <div class="input-group-prepend">
+                              <span class="input-group-text"> <i class="fas fa-envelope-square"></i></span>
+                           </div>
+                           {{form_widget(form.email, {'attr':{'class':'form-control', 'placeholder':'E-mail'}})}}
+                        </div>
+                        <div class="form-group">
+                           <input type="submit" value="Login" class="btn float-right login_btn">
+                        </div>
+                  </form>
+               {{ form_end(form) }}
+            </div>
+         </div>
+      </div>
+   </div>
 
 {% endblock %}
