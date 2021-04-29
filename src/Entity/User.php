@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -40,6 +42,16 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private $username;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=GameType::class, inversedBy="users")
+     */
+    private $interests;
+
+    public function __construct()
+    {
+        $this->interests = new ArrayCollection();
+    }
 
 
 
@@ -130,5 +142,29 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection|GameType[]
+     */
+    public function getInterests(): Collection
+    {
+        return $this->interests;
+    }
+
+    public function addInterest(GameType $interest): self
+    {
+        if (!$this->interests->contains($interest)) {
+            $this->interests[] = $interest;
+        }
+
+        return $this;
+    }
+
+    public function removeInterest(GameType $interest): self
+    {
+        $this->interests->removeElement($interest);
+
+        return $this;
     }
 }
