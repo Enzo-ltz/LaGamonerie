@@ -49,11 +49,14 @@
         }
 
         html,body{
+            height: 100%;
+            font-family: 'Numans', sans-serif;
+        }
+
+        .login_background{
             background-image: url("{{ asset('images/login_background.jpg') }}");
             background-size: cover;
             background-repeat: no-repeat;
-            height: 100%;
-            font-family: 'Numans', sans-serif;
         }
 
         .container{
@@ -101,11 +104,7 @@
 
     </style>
 </head>
-<body class="body">
+<body class="body {% if bodyClass is defined %} {{ bodyClass }} {% endif %}">
 {% block body %}{% endblock %}
 </body>
 </html>
-
-
-
-

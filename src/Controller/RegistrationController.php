@@ -35,7 +35,7 @@ class RegistrationController extends AbstractController
             dd($user);
         }
         return $this->render('registration/index.html.twig', [
-            'form' => $form->createView(),
+            'form' => $form->createView(), "bodyClass" => "login_background"
         ]);
     }
 

@@ -51,12 +51,46 @@ class User implements UserInterface
     /**
      * @ORM\OneToMany(targetEntity=Evaluate::class, mappedBy="ID_voter")
      */
+
     private $evaluates;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $bio;
+
+    /**
+     * @ORM\Column(type="string", length=30, nullable=true)
+     */
+    private $town;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $birthday;
+    /**
+     * @ORM\ManyToMany(targetEntity=GameType::class, inversedBy="users")
+     */
+    private $interests;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Language::class, inversedBy="users")
+     *
+     */
+    private $languages;
 
     public function __construct()
     {
+        $this->languages = new ArrayCollection();
+        $this->interests = new ArrayCollection();
         $this->messages = new ArrayCollection();
         $this->evaluates = new ArrayCollection();
+
     }
 
 
@@ -65,6 +99,7 @@ class User implements UserInterface
     {
         return $this->id;
     }
+
 
 
     public function getEmail(): ?string
@@ -206,6 +241,102 @@ class User implements UserInterface
                 $evaluate->setIDVoter(null);
             }
         }
+
+        return $this;
+    }
+    
+
+    /**
+     * @return Collection|GameType[]
+     */
+    public function getInterests(): Collection
+    {
+        return $this->interests;
+    }
+
+    public function addInterest(GameType $interest): self
+    {
+        if (!$this->interests->contains($interest)) {
+            $this->interests[] = $interest;
+        }
+    }
+
+    public function removeInterest(GameType $interest): self
+    {
+        $this->interests->removeElement($interest);
+    }
+
+    public function getBio(): ?string
+    {
+        return $this->bio;
+    }
+
+    public function setBio(?string $bio): self
+    {
+        $this->bio = $bio;
+
+        return $this;
+    }
+
+    public function getTown(): ?string
+    {
+        return $this->town;
+    }
+
+    public function setTown(?string $town): self
+    {
+        $this->town = $town;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function getBirthday(): ?\DateTimeInterface
+    {
+        return $this->birthday;
+    }
+
+    public function setBirthday(?\DateTimeInterface $birthday): self
+    {
+        $this->birthday = $birthday;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Language[]
+     */
+    public function getLanguages(): Collection
+    {
+        return $this->languages;
+    }
+
+    public function addLanguage(Language $language): self
+    {
+        if (!$this->languages->contains($language)) {
+            $this->languages[] = $language;
+
+        }
+
+        return $this;
+    }
+
+
+    public function removeLanguage(Language $language): self
+    {
+        $this->languages->removeElement($language);
+
 
         return $this;
     }
