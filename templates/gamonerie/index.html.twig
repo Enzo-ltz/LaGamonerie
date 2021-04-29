@@ -3,7 +3,33 @@
 {% block title %}Hello {{ app.user.username }}{% endblock %}
 
 {% block body %}
+
 {% include 'includes/homeHeader.html.twig' %}
-{% include 'includes/sideBar.html.twig' %}
+<div class="row">
+    <div class="col-9">
+        <div class="row p-3">
+            <!-- Loop the next div -->
+            <div class="col-4 my-5 player-card d-flex align-items-center justify-content-center">
+                <div class="shadow p-2 player-card-inborder" data-toggle="modal" data-target="#exampleModal" v-on:click="currentMoto = moto" >
+                    <div class="w-100 player-card-image ">
+                        <img class="w-100 h-100" src="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg">
+                    </div>
+                    <div class="row p-0 m-0">
+                        <div class="col-12">
+                            <i class="fas fa-gamepad"></i> Super Mario
+                        </div>
+                        <div class="col-12">
+                            <i class="fas fa-asterisk"></i> Aventure
+                        </div>
+                        <div class="col-12">
+                            <i class="fas fa-chalkboard"></i> NES - PC - Nintendo 64
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include 'includes/sideBar.html.twig' %}
+</div>
 
 {% endblock %}
