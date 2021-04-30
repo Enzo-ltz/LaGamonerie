@@ -23,6 +23,7 @@ class UserType extends AbstractType
                 "second_options"=>["label"=>"Confirm Password"],
             ])
             ->add("username",TextType::class)
+            ->add("bio",TextType::class)
         ;
     }
 

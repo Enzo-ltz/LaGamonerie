@@ -63,8 +63,8 @@ class GamonerieController extends AbstractController
     /**
      * @Route("/gamer/profile/{id}", name="profile")
      */
-    public function profil(): Response
-    {
-        return $this->render('gamonerie/profile.html.twig');
+    public function profile(int $id, UserRepository $userRepository): Response
+    {   
+        return $this->render('gamonerie/profile.html.twig', ['user'=> $userRepository->find($id) ]);
     }
 }

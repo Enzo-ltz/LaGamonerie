@@ -20,6 +20,12 @@
                         </div>
                         <div class="input-group form-group">
                            <div class="input-group-prepend">
+                              <span class="input-group-text"> <i class="fas fa-envelope-square"></i></span>
+                           </div>
+                           {{form_widget(form.email, {'attr':{'class':'form-control', 'placeholder':'E-mail'}})}}
+                        </div>
+                        <div class="input-group form-group">
+                           <div class="input-group-prepend">
                               <span class="input-group-text"><i class="fas fa-key"></i></span>
                            </div>
                               {{form_widget(form.password.first, {'attr':{'class':'form-control', 'placeholder':'Password'}})}}
@@ -32,12 +38,12 @@
                         </div>
                         <div class="input-group form-group">
                            <div class="input-group-prepend">
-                              <span class="input-group-text"> <i class="fas fa-envelope-square"></i></span>
+                              <span class="input-group-text"><i class="fas fa-address-card"></i></span>
                            </div>
-                           {{form_widget(form.email, {'attr':{'class':'form-control', 'placeholder':'E-mail'}})}}
+                           {{form_widget(form.bio, {'attr':{'class':'form-control', 'placeholder':'Talk about you'}})}}
                         </div>
                         <div class="form-group">
-                           <input type="submit" value="Login" class="btn float-right login_btn">
+                           <input type="submit" value="Sign Up" class="btn float-right login_btn">
                         </div>
                   {{ form_end(form) }}
             </div>

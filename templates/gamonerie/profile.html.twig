@@ -1,1 +1,35 @@
-test2
+{% extends 'base.html.twig' %}
+
+{% block title %}Game Detail{% endblock %}
+
+{% block body %}
+
+
+{% include 'includes/profileHeader.html.twig' %}
+
+<div class="row">
+    <div class="col-8 offset-2 profile">
+        <div class="row align-items-center">
+            <img src="https://mdn.mozillademos.org/files/12700/basic-image.png" class="img-thumbnail profile-image mr-5">
+            <h1>{{ user.username }}</h1>
+        </div>
+        <div class="row pt-3 pl-3">
+            {{user.email}}
+        </div>
+        <div class="row pt-3 pl-3">
+            <h3>Description :</h3>
+        </div>
+        <div class="row px-5">
+            {{ user.bio }}
+        </div>
+        <div class="row pt-3 pl-3">
+            <h3>Jeux intéressés :</h3>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script src="{{ asset("js/games.js") }}" defer></script>
+{% endblock %}
