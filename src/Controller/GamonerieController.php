@@ -17,9 +17,9 @@ class GamonerieController extends AbstractController
     }
 
     /**
-     * @Route("/gamer/game", name="game")
+     * @Route("/gamer/game/{id}", name="game")
      */
-    public function game(): Response
+    public function game(int $id): Response
     {
         return $this->render('gamonerie/game.html.twig');
     }
