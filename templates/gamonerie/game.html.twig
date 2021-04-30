@@ -1,1 +1,43 @@
-test
+{% extends 'base.html.twig' %}
+
+{% block title %}Game Detail{% endblock %}
+
+{% block body %}
+
+{% include 'includes/gameHeader.html.twig' %}
+
+
+<div class="row">
+    <div class="col-9">
+        <div class="row p-3">
+            <!-- Loop the next div -->
+            <div class="col-4 my-5 player-card d-flex align-items-center justify-content-center">
+                <div class="shadow p-2 player-card-inborder">
+                    <div class="w-100 player-card-image ">
+                        <img class="w-100 h-100" src="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg">
+                    </div>
+                    <div class="row p-0 m-0">
+                        <div class="row p-0 m-0">
+                                <div class="col-12">
+                                    <i class="fas fa-user"></i> HelloImTroll
+                                </div>
+                                <div class="col-12">
+                                    <i class="fas fa-venus-mars"></i> Bonhomme
+                                </div>
+                                <div class="col-12">
+                                    <i class="fas fa-birthday-cake"></i> 20 ans
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include 'includes/gameSideBar.html.twig' %}
+    </div>
+
+{% endblock %}
+
+{% block script %}
+<script src="{{ asset("js/games.js") }}" defer></script>
+{% endblock %}
