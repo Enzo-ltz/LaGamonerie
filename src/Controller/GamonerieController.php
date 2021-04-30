@@ -6,6 +6,7 @@ use http\Client;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\UserRepository;
 
 class GamonerieController extends AbstractController
 {
@@ -21,15 +22,17 @@ class GamonerieController extends AbstractController
         $response = $client->request("GET",$url);
         $games = json_decode($response->getBody()->getContents())->data->games;
 
-        return $this->render('gamonerie/index.html.twig');
+        return $this->render('gamonerie/index.html.twig', ['games' => $games] );
     }
 
     /**
      * @Route("/gamer/game/{id}", name="game")
      */
-    public function game(int $id): Response
-    {
-        return $this->render('gamonerie/game.html.twig');
+    public function game(int $id, UserRepository $emUser): Response
+    {   
+        return $this->render('gamonerie/game.html.twig',[
+            'users' => $emUser->findAll()
+        ] );
     }
 
     /**

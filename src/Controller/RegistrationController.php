@@ -39,7 +39,4 @@ class RegistrationController extends AbstractController
             'form' => $form->createView(), "bodyClass" => "login_background"
         ]);
     }
-
-
-
 }
