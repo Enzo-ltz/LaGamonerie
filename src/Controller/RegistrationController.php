@@ -26,6 +26,7 @@ class RegistrationController extends AbstractController
         $user=new User();
         $form=$this->createForm(UserType::class,$user);
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()){
             $user->setRoles(["ROLE_USER"]);
             $user->setPassword($this->passwordEncoder->encodePassword($user,$user->getPassword()));

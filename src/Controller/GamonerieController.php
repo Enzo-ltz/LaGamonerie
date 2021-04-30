@@ -13,8 +13,30 @@ class GamonerieController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('gamonerie/index.html.twig', [
-            'controller_name' => 'GamonerieController',
-        ]);
+        return $this->render('gamonerie/index.html.twig');
+    }
+
+    /**
+     * @Route("/gamer/game", name="game")
+     */
+    public function game(): Response
+    {
+        return $this->render('gamonerie/game.html.twig');
+    }
+
+    /**
+     * @Route("/gamer/messages", name="message")
+     */
+    public function gamersmessages(): Response
+    {
+        return $this->render('gamonerie/gamersmessages.html.twig');
+    }
+
+    /**
+     * @Route("/gamer/profil", name="profil")
+     */
+    public function profil(): Response
+    {
+        return $this->render('gamonerie/profil.html.twig');
     }
 }
