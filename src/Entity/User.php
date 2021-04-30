@@ -44,6 +44,17 @@ class User implements UserInterface
     private $username;
 
     /**
+     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="ID_from", orphanRemoval=true)
+     */
+    private $messages;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Evaluate::class, mappedBy="ID_voter")
+     */
+
+    private $evaluates;
+
+    /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $bio;
@@ -77,6 +88,8 @@ class User implements UserInterface
     {
         $this->languages = new ArrayCollection();
         $this->interests = new ArrayCollection();
+        $this->messages = new ArrayCollection();
+        $this->evaluates = new ArrayCollection();
 
     }
 
@@ -86,6 +99,7 @@ class User implements UserInterface
     {
         return $this->id;
     }
+
 
 
     public function getEmail(): ?string
@@ -172,6 +186,67 @@ class User implements UserInterface
     }
 
     /**
+     * @return Collection|Message[]
+     */
+    public function getMessages(): Collection
+    {
+        return $this->messages;
+    }
+
+    public function addMessage(Message $message): self
+    {
+        if (!$this->messages->contains($message)) {
+            $this->messages[] = $message;
+            $message->setIDFrom($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessage(Message $message): self
+    {
+        if ($this->messages->removeElement($message)) {
+            // set the owning side to null (unless already changed)
+            if ($message->getIDFrom() === $this) {
+                $message->setIDFrom(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Evaluate[]
+     */
+    public function getEvaluates(): Collection
+    {
+        return $this->evaluates;
+    }
+
+    public function addEvaluate(Evaluate $evaluate): self
+    {
+        if (!$this->evaluates->contains($evaluate)) {
+            $this->evaluates[] = $evaluate;
+            $evaluate->setIDVoter($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEvaluate(Evaluate $evaluate): self
+    {
+        if ($this->evaluates->removeElement($evaluate)) {
+            // set the owning side to null (unless already changed)
+            if ($evaluate->getIDVoter() === $this) {
+                $evaluate->setIDVoter(null);
+            }
+        }
+
+        return $this;
+    }
+    
+
+    /**
      * @return Collection|GameType[]
      */
     public function getInterests(): Collection
@@ -184,6 +259,11 @@ class User implements UserInterface
         if (!$this->interests->contains($interest)) {
             $this->interests[] = $interest;
         }
+    }
+
+    public function removeInterest(GameType $interest): self
+    {
+        $this->interests->removeElement($interest);
     }
 
     public function getBio(): ?string
@@ -252,11 +332,6 @@ class User implements UserInterface
         return $this;
     }
 
-
-    public function removeInterest(GameType $interest): self
-    {
-        $this->interests->removeElement($interest);
-    }
 
     public function removeLanguage(Language $language): self
     {
