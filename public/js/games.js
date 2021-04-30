@@ -1,1 +1,0 @@
-getByGameName("Final Fantasy VII")

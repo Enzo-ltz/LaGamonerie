@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use http\Client;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,6 +14,13 @@ class GamonerieController extends AbstractController
      */
     public function index(): Response
     {
+        $client = new \GuzzleHttp\Client();
+        $APIKEY = "dc270a27679c16a3dd254514fded7f408167f1556a3a8e721641fead42f7673d";
+        $BASEURL = "https://api.thegamesdb.net/v1/";
+        $url = $BASEURL."Games/ByGameName?apikey=".$APIKEY."&name=Zelda";
+        $response = $client->request("GET",$url);
+        $games = json_decode($response->getBody()->getContents())->data->games;
+
         return $this->render('gamonerie/index.html.twig');
     }
 
