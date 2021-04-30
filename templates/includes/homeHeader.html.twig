@@ -1,10 +1,14 @@
 <div class="row header">
      <div class="col-md-4 my-auto">
          <div class="input-group">
-         
-             <button type="button" class="btn btn-primary"><i class="fas fa-search"></i></button>
-             <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
-                 aria-describedby="search-addon" />
+            {{ form_start(form) }}
+                <div class="input-group form-group my-auto">
+                    {{form_widget(form.name, {'attr':{'class':'form-control rounded', 'placeholder':'Rechercher un jeu','aria-label':'Search','aria-describedby':'search-addon'}})}}
+                    <div class="input-group-prepend">
+                        <input type="submit" value="Search" class="btn float-right login_btn">
+                    </div>
+                </div>
+            {{ form_end(form) }}
          </div>
      </div>
      <div class="col-md-3 offset-5 pr-4  d-flex justify-content-end my-auto">
