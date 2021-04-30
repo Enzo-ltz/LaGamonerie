@@ -33,7 +33,7 @@ class RegistrationController extends AbstractController
             $entity_manager=$this->getDoctrine()->getManager();
             $entity_manager->persist($user);
             $entity_manager->flush();
-            dd($user);
+            return $this->redirectToRoute('app_login');
         }
         return $this->render('registration/index.html.twig', [
             'form' => $form->createView(), "bodyClass" => "login_background"

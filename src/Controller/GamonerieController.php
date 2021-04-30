@@ -21,7 +21,7 @@ class GamonerieController extends AbstractController
         $gameName=new GameType;
         $form=$this->createForm(GameForm::class,$gameName);
         $form->handleRequest($request);
-        $myGame="Zelda";
+        $myGame="league";
         if ($form->isSubmitted()){
             $myGame = $form->getData()->getName();
         }
@@ -40,8 +40,15 @@ class GamonerieController extends AbstractController
      */
     public function game(int $id, UserRepository $emUser): Response
     {   
+        $client = new \GuzzleHttp\Client();
+        $APIKEY = "dc270a27679c16a3dd254514fded7f408167f1556a3a8e721641fead42f7673d";
+        $BASEURL = "https://api.thegamesdb.net/v1/";
+        $url = $BASEURL."Games/ByGameID?apikey=".$APIKEY."&id=".$id;
+        $response = $client->request("GET",$url);
+        $game = json_decode($response->getBody()->getContents())->data->games;
         return $this->render('gamonerie/game.html.twig',[
-            'users' => $emUser->findAll()
+            'users' => $emUser->findAll(),
+            'game' => $game[0]
         ] );
     }
 
@@ -54,10 +61,10 @@ class GamonerieController extends AbstractController
     }
 
     /**
-     * @Route("/gamer/profil", name="profil")
+     * @Route("/gamer/profile/{id}", name="profile")
      */
     public function profil(): Response
     {
-        return $this->render('gamonerie/profil.html.twig');
+        return $this->render('gamonerie/profile.html.twig');
     }
 }
