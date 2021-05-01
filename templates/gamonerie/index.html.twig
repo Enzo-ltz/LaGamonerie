@@ -11,37 +11,45 @@
             <!-- Loop the next div -->
             {% for game in games %}
             <div class="col-4 mt-5 player-card d-flex align-items-center justify-content-center">
-                <a href="{{ path('game',{'id': game.id})}}" class="color-href">
-                    <div class="shadow p-2 player-card-inborder">
+                <div class="shadow p-2 player-card-inborder">
+                    <a href="{{ path('game',{'id': game.id})}}" class="color-href">
                         <div class="w-100 player-card-image ">
-                            <img class="w-100 h-100" src="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg">
+                            <img class="w-100 h-100" src="https://www.entreprises.gouv.fr/files/files/secteurs-d-activite/numerique/politique-numerique/join-the-game/france-jeu-videoh.png">
                         </div>
+                    </a>
+                    <div class="row p-0 m-0">
                         <div class="row p-0 m-0">
-                            <div class="row p-0 m-0">
+                            <div class="col-12">
+                                <i class="fas fa-gamepad"></i> {{ game.game_title }}
+                            </div>
+                            {% if game.release_date|default %}
                                 <div class="col-12">
-                                    <i class="fas fa-gamepad"></i> {{ game.game_title }}
+                                    <i class="fas fa-calendar"></i> {{ game.release_date}}
                                 </div>
-                                {% if game.release_date|default %}
-                                    <div class="col-12">
-                                        <i class="fas fa-calendar"></i> {{ game.release_date}}
-                                    </div>
-                                {% endif %}
-                                <div class="col-12">
-                                    {% if game.youtube|default %}
-                                        <a href={{game.youtube}} class="color-href">
+                            {% endif %}
+                            <div class="col-12">
+                                {% if game.youtube|default %}
+                                    {% if game.youtube starts with 'http' %}
+                                        <a href={{game.youtube}} class="color-href" target="_blank">
+                                            <i class="fab fa-youtube"></i> Bande annonce <i class="fas fa-sign-out-alt"></i>
+                                        </a>
+                                    {% else %}
+                                        <a href={{ 'https://www.youtube.com/watch?v=' ~ game.youtube }} class="color-href" target="_blank">
                                             <i class="fab fa-youtube"></i> Bande annonce <i class="fas fa-sign-out-alt"></i>
                                         </a>
                                     {% endif %}
-                                </div>
-                                <div class="col-12 justify-content-center input-group form-group my-auto">
+                                {% endif %}
+                            </div>
+                            <div class="col-12 justify-content-center input-group form-group my-auto">
+                                <a href="{{ path('game',{'id': game.id})}}" class="color-href">
                                     <div class="input-group-prepend">
-                                        <input type="submit" value="Ajouter Intérêt" class="btn float-right interest_btn">
+                                        <input type="submit" value="Trouver des joueurs" class="btn float-right interest_btn">
                                     </div>
-                                </div>
+                                </a>
                             </div>
                         </div>
                     </div>
-                </a>
+                </div>
             </div>
 
             {% endfor %}

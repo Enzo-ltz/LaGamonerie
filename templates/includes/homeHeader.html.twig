@@ -11,10 +11,15 @@
             {{ form_end(form) }}
          </div>
      </div>
-     <div class="col-md-3 offset-5 pr-4  d-flex justify-content-end my-auto">
-        <i class="fas fa-2x fa-envelope px-3"></i>
+    <div class="col-md-4 mx-auto d-flex justify-content-center">
+        <h2 class="font-weight-bold">Bienvenue {{app.user.username}} !</h2>
+    </div>
+     <div class="col-md-3 offset-1 pr-4  d-flex justify-content-end my-auto">
         <a href="{{ path('profile',{'id': app.user.id})}}" class="color-href">
             <i class="fas fa-2x fa-user px-3"></i>
         </a>
+        {% if app.user %}
+            <a href="{{ path('app_logout') }}" class="color-href"><i class="fas fa-2x fa-power-off"></i></a>
+        {% endif %}
      </div>
 </div>

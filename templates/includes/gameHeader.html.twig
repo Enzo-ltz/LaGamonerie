@@ -8,9 +8,11 @@
         <h2 class="font-weight-bold">{{game.game_title}}</h2>
     </div>
      <div class="col-md-1 offset-md- pr-4 d-flex justify-content-end my-auto">
-         <i class="fas fa-2x fa-envelope px-3"></i>
          <a href="{{ path('profile',{'id': app.user.id})}}" class="color-href">
             <i class="fas fa-2x fa-user px-3"></i>
         </a>
+        {% if app.user %}
+            <a href="{{ path('app_logout') }}" class="color-href"><i class="fas fa-2x fa-power-off"></i></a>
+        {% endif %}
      </div>
 </div>
