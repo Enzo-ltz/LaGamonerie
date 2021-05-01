@@ -21,17 +21,16 @@ class GamonerieController extends AbstractController
         $gameName=new GameType;
         $form=$this->createForm(GameForm::class,$gameName);
         $form->handleRequest($request);
-        $myGame="league";
+        $myGame="zelda";
         if ($form->isSubmitted()){
             $myGame = $form->getData()->getName();
         }
         $client = new \GuzzleHttp\Client();
         $APIKEY = "dc270a27679c16a3dd254514fded7f408167f1556a3a8e721641fead42f7673d";
         $BASEURL = "https://api.thegamesdb.net/v1/";
-        $url = $BASEURL."Games/ByGameName?apikey=".$APIKEY."&name=".$myGame;
+        $url = $BASEURL."Games/ByGameName?apikey=".$APIKEY."&name=".$myGame."&fields=youtube";
         $response = $client->request("GET",$url);
         $games = json_decode($response->getBody()->getContents())->data->games;
-
         return $this->render('gamonerie/index.html.twig', ['games' => $games, 'form' => $form->createView()] );
     }
 
